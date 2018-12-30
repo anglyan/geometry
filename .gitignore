@@ -1,1 +1,3 @@
 *.pyc
+geom3d.egg-info
+dist

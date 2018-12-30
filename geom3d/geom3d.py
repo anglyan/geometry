@@ -1,15 +1,15 @@
 """
-Auxiliary module for carrying out 3D vector operations
+Auxiliary module for carrying out 3D Vec3 operations
 
-It contemplates vector operations 
+It contemplates Vec3 operations
 
 """
 
 import math as m
 
-class Vector:
+class Vec3:
     """
-    Implement a 3D metric vector space
+    Implement a 3D vector
     """
 
     def __init__(self, *args):
@@ -24,64 +24,64 @@ class Vector:
             self.x = args[0]
             self.y = args[1]
             self.z = args[2]
-        
+
     def get_coords(self):
         """
         Returns the coordinates as a tuple
         """
         return self.x, self.y, self.z
-    
+
     def __str__(self):
         return "(%8.4f %8.4f %8.4f)" % (self.x, self.y, self.z)
-    
+
     def __repr__(self):
         return repr((self.x,self.y,self.z))
-    
+
     def __add__(self, other):
         if isinstance(other, tuple):
             return (other[0], self.x + other[1], self.y + other[2],
                 self.z + other[3])
         else:
-            return Vector(self.x+other.x, self.y+other.y, self.z+other.z)
-            
+            return Vec3(self.x+other.x, self.y+other.y, self.z+other.z)
+
     def __radd__(self, other):
         if isinstance(other, tuple):
             return (other[0], self.x + other[1], self.y + other[2],
                 self.z + other[3])
         else:
-            return Vector(self.x+other.x, self.y+other.y, self.z+other.z)
-        
-    
+            return Vec3(self.x+other.x, self.y+other.y, self.z+other.z)
+
+
     def __comp__(self, other):
         return self.x == other.x and self.y == other.y and self.z == other.z
-    
+
     def __div__(self, number):
-        return Vector(self.x/number, self.y/number, self.z/number)
-    
+        return Vec3(self.x/number, self.y/number, self.z/number)
+
     def __sub__(self, other):
         if isinstance(other, tuple):
             return (other[0], self.x - other[1], self.y - other[2],
                 self.z - other[3])
         else:
-            return Vector(self.x-other.x, self.y-other.y, self.z-other.z)
+            return Vec3(self.x-other.x, self.y-other.y, self.z-other.z)
 
     def __rsub__(self, other):
         if isinstance(other, tuple):
             return (other[0], other[1] - self.x , other[2] - self.y,
                 other[3]-self.z)
         else:
-            return Vector(other.x-selfx, other.y-self.y, other.z-self.z)
+            return Vec3(other.x-selfx, other.y-self.y, other.z-self.z)
 
-    
+
     def __rmul__(self, number):
-        return Vector(self.x*number, self.y*number, self.z*number)
-    
+        return Vec3(self.x*number, self.y*number, self.z*number)
+
     def __neg__(self):
-        return Vector(-self.x, -self.y, -self.z)
-    
+        return Vec3(-self.x, -self.y, -self.z)
+
     def copy(self):
-        return Vector(self.x, self.y, self.z)
-    
+        return Vec3(self.x, self.y, self.z)
+
     def xrotate(self, theta):
         ct = m.cos(theta)
         st = m.sin(theta)
@@ -90,7 +90,7 @@ class Vector:
         self.y = ny
         self.z = nz
         return self
-    
+
     def yrotate(self, theta):
         ct = m.cos(theta)
         st = m.sin(theta)
@@ -99,7 +99,7 @@ class Vector:
         self.x = nx
         self.z = nz
         return self
-    
+
     def zrotate(self, theta):
         ct = m.cos(theta)
         st = m.sin(theta)
@@ -108,11 +108,11 @@ class Vector:
         self.x = nx
         self.y = ny
         return self
-    
+
     def xmirror(self):
         self.x = -self.x
         return self
-    
+
     def ymirror(self):
         self.y = -self.y
         return self
@@ -123,19 +123,19 @@ class Vector:
 
     def __abs__(self):
         return m.sqrt(self.x*self.x + self.y*self.y + self.z*self.z)
-    
+
     def translate(self, v):
         self.x += v.x
         self.y += v.y
         self.z += v.z
         return self
-    
+
     def invert(self):
         self.x =- self.x
         self.y =- self.y
         self.z =- self.z
         return self
-    
+
     def rescale(self, value):
         self.x *= value
         self.y *= value
@@ -144,15 +144,15 @@ class Vector:
 
 
 def new_site(p, site_id='X'):
-    """Defines a new site at a position given by a Vector p"""
-    return (site_id, p.x, p.y, p.z)       
+    """Defines a new site at a position given by a vector p"""
+    return (site_id, p.x, p.y, p.z)
 
-def tovector(v):
+def toVec3(v):
     """Convert a list or tuble to a vector"""
-    if isinstance(v, Vector):
+    if isinstance(v, Vec3):
         return v.copy()
     else:
-        return Vector(*v)
+        return Vec3(*v)
 
 
 def xrotate(p, theta):
@@ -194,7 +194,7 @@ def zmirror(p):
 
 def translate(p,v):
     """Return a new vector after performing a translation along the
-    vector v
+    Vec3 v
     """
     p = p.copy()
     return p.translate(theta)
@@ -224,7 +224,7 @@ def scalar(p1, p2):
 
 def vprod(p1, p2):
     """Cross product between p1 and p2"""
-    return Vector(p1.y*p2.z - p1.z*p2.y,
+    return Vec3(p1.y*p2.z - p1.z*p2.y,
                   p1.z*p2.x - p1.x*p2.z,
                   p1.x*p2.y - p1.y*p2.x)
 
@@ -247,7 +247,3 @@ def getangle(ct, st):
     if st < 0:
         t=-t
     return t
-    
-    
-
-   

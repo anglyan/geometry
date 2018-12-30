@@ -9,7 +9,7 @@ setuptools.setup(
     version = "0.1.0",
     author = "Angel Yanguas-Gil",
     author_email = "angel.yanguas@gmail.com",
-    description = "3D geometry package,
+    description = "3D geometry package",
     long_description = long_description,
     long_description_context_type = "text/markdown",
     packages=setuptools.find_packages(),

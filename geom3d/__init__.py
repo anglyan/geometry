@@ -1,1 +1,1 @@
-from geom3d import *
+from .geom3d import *
