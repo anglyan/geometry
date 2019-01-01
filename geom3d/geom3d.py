@@ -55,7 +55,7 @@ class Vec3:
     def __comp__(self, other):
         return self.x == other.x and self.y == other.y and self.z == other.z
 
-    def __div__(self, number):
+    def __truediv__(self, number):
         return Vec3(self.x/number, self.y/number, self.z/number)
 
     def __sub__(self, other):
@@ -143,17 +143,12 @@ class Vec3:
         return self
 
 
-def new_site(p, site_id='X'):
-    """Defines a new site at a position given by a vector p"""
-    return (site_id, p.x, p.y, p.z)
-
 def toVec3(v):
     """Convert a list or tuble to a vector"""
     if isinstance(v, Vec3):
         return v.copy()
     else:
         return Vec3(*v)
-
 
 def xrotate(p, theta):
     """Return a new vector after performing a rotation on p around
@@ -209,6 +204,9 @@ def rescale(p, a):
     p = p.copy()
     return p.scale(a)
 
+def unit(v):
+    """Return a unit vector"""
+    return v/abs(v)
 
 def dist(p1, p2):
     """Distance between p1 and p2"""
